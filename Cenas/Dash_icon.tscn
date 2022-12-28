@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Sprite/dash.png" type="Texture" id=1]
+[ext_resource path="res://script/Dash_icon.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+
+[node name="Dash_icon" type="Sprite"]
+position = Vector2( 288, 71 )
+scale = Vector2( 0.216, 0.236 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2( 10.6764, 10.6789 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

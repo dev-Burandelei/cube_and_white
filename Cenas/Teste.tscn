@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Cenas/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Cenas/Dash_icon.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Cenas/Poste.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Cenas/Gancho_icon.tscn" type="PackedScene" id=4]
+
+[node name="Teste" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 68, 270 )
+
+[node name="Dash_icon" parent="." instance=ExtResource( 2 )]
+
+[node name="Poste" parent="." instance=ExtResource( 3 )]
+position = Vector2( 367, 260.421 )
+scale = Vector2( 0.0107684, 0.201137 )
+
+[node name="Gancho_icon" parent="." instance=ExtResource( 4 )]
+position = Vector2( 619, 113 )
