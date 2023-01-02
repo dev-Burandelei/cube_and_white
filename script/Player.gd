@@ -29,6 +29,8 @@ func _exit_tree():
 	
 	
 func _physics_process(delta):
+	
+	global_update()
 	match STATE:
 		
 		MOVE: 
@@ -98,3 +100,17 @@ func gancho_state():
 	var _aux = move_and_slide(velocity * speed * 15)
 	STATE = MOVE
 	 
+func global_update():
+	
+	Global.dash = qte_dash
+	Global.gancho = qte_gancho
+	
+	if qte_dash > 0:
+		Global.Can_Dash = true
+	else: 
+		Global.Can_Dash = false
+	
+	if qte_gancho > 0:
+		Global.Can_Gancho = true 
+	else:
+		Global.Can_Gancho = false
