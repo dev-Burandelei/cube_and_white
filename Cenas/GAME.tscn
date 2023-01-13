@@ -1,13 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://script/GAME.gd" type="Script" id=1]
 [ext_resource path="res://script/Tempo.gd" type="Script" id=2]
 [ext_resource path="res://script/Dash_Icon_HUD.gd" type="Script" id=3]
 [ext_resource path="res://script/Dash_Icon_HUD2.gd" type="Script" id=4]
 [ext_resource path="res://script/FasesConcluidas.gd" type="Script" id=5]
-[ext_resource path="res://Sprite/quadradoverde_1_original-300x300.png" type="Texture" id=6]
-
-[sub_resource type="RectangleShape2D" id=1]
 
 [node name="GAME" type="Control"]
 anchor_right = 1.0
@@ -65,21 +62,4 @@ margin_bottom = 27.0
 text = "Gancho"
 script = ExtResource( 4 )
 
-[node name="Gerenciador" type="Node" parent="."]
-
-[node name="Sprite" type="Sprite" parent="Gerenciador"]
-position = Vector2( 878, 328 )
-texture = ExtResource( 6 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Signal_fase" type="Area2D" parent="Gerenciador/Sprite"]
-position = Vector2( 0, 3.99997 )
-scale = Vector2( 11.2568, 11.1364 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Gerenciador/Sprite/Signal_fase"]
-shape = SubResource( 1 )
-
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="body_entered" from="Gerenciador/Sprite/Signal_fase" to="." method="_on_Signal_fase_body_entered"]

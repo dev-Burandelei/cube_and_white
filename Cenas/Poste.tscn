@@ -1,26 +1,25 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Sprite/quadrado-vermelho.png" type="Texture" id=1]
+[ext_resource path="res://Sprite/poste.png" type="Texture" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 9.73787, 10 )
+extents = Vector2( 0.277303, 0.732265 )
 
 [node name="Poste" type="Sprite" groups=["Poste"]]
 light_mask = 2
-position = Vector2( 0, 9.15894 )
-scale = Vector2( 0.0107684, 0.0536245 )
+position = Vector2( 423, 312 )
+scale = Vector2( 2, 1.96875 )
 texture = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Area2D" type="Area2D" parent="."]
 light_mask = 2
+position = Vector2( 0, 8.38763 )
 scale = Vector2( 38.1457, 37.0228 )
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 light_mask = 2
+position = Vector2( 0, -0.103077 )
 scale = Vector2( 1.00445, 1 )
 shape = SubResource( 1 )

@@ -16,7 +16,7 @@ var is_dashing = true
 var can_dash = true
 var qte_dash = 3
 
-var speed = 100
+var speed = 200
 var velocity = Vector2()
 
 func _ready():
@@ -95,7 +95,7 @@ func dash_state(_delta):
 	var _aux = move_and_slide(velocity * Dash_Speed)
 	
 func gancho_state():
-	velocity = position.direction_to(gancho.get_collision_point())
+	velocity = global_position.direction_to(gancho.get_collision_point())
 	velocity = velocity.normalized()
 	var _aux = move_and_slide(velocity * speed * 15)
 	STATE = MOVE
@@ -114,3 +114,7 @@ func global_update():
 		Global.Can_Gancho = true 
 	else:
 		Global.Can_Gancho = false
+		
+func gameover():
+	queue_free()
+	assert(get_tree().change_scene("res://Cenas/GAMEOVER.tscn"))
