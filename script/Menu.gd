@@ -5,7 +5,7 @@ extends Control
 
 
 func _on_START_pressed():
-	assert(get_tree().change_scene("res://Cenas/Teste.tscn") == OK)
+	assert(get_tree().change_scene("res://Cenas/fase_prototipo.tscn") == OK)
 	
 
 

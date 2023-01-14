@@ -3,7 +3,7 @@ extends Label
 
 
 func _process(_delta):
-	self.text = "GANCHO:" + String(Global.gancho) 
+	self.text = "GANCHO:" + str(Global.gancho) 
 
 	
 	if Global.Can_Gancho == true:

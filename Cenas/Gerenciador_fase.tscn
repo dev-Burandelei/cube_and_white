@@ -6,7 +6,8 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 [node name="Gerenciador_fase" type="Sprite"]
-position = Vector2( 427, 141 )
+position = Vector2( 533, -116 )
+scale = Vector2( 5.4, 1 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 __meta__ = {
@@ -16,6 +17,9 @@ __meta__ = {
 [node name="Signal_fase" type="Area2D" parent="."]
 position = Vector2( 0, 3.99997 )
 scale = Vector2( 11.2568, 11.1364 )
+collision_layer = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Signal_fase"]
 shape = SubResource( 1 )
+
+[connection signal="body_entered" from="Signal_fase" to="." method="_on_Signal_fase_body_entered"]

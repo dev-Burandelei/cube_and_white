@@ -10,11 +10,17 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "KinematicBody2D",
+"class": "Bullet_Big_enemy",
+"language": "GDScript",
+"path": "res://script/Bullet_big.gd"
+}, {
+"base": "KinematicBody2D",
 "class": "Bullet_enemy",
 "language": "GDScript",
 "path": "res://script/Enemy.gd"
 } ]
 _global_script_class_icons={
+"Bullet_Big_enemy": "",
 "Bullet_enemy": ""
 }
 
@@ -88,5 +94,5 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-environment/default_clear_color=Color( 0.0196078, 0.0196078, 0.0196078, 1 )
+environment/default_clear_color=Color( 0.152941, 0.152941, 0.152941, 1 )
 environment/default_environment="res://default_env.tres"

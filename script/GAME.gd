@@ -2,7 +2,7 @@ extends Control
 
 
 func _ready():
-	Global.time = 60
+	Global.time = 15
 	
 
 func _on_Timer_timeout():

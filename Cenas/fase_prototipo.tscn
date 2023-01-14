@@ -1,23 +1,30 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Cenas/GAME.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Cenas/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Cenas/Gerenciador_fase.tscn" type="PackedScene" id=3]
 [ext_resource path="res://script/fase_prototipo.gd" type="Script" id=4]
 [ext_resource path="res://Cenas/Enemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Cenas/Bullet_big.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Cenas/Poste.tscn" type="PackedScene" id=7]
 
 [node name="fase_prototipo" type="Node2D"]
 script = ExtResource( 4 )
 
-[node name="GAME" parent="." instance=ExtResource( 1 )]
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.0
-margin_top = 356.0
-margin_bottom = 356.0
+[node name="Poste3" parent="." instance=ExtResource( 7 )]
+position = Vector2( 849, -120 )
+scale = Vector2( 5.5, 3.7 )
+
+[node name="Poste2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 573, -117 )
+scale = Vector2( 5.5, 3.7 )
+
+[node name="Poste" parent="." instance=ExtResource( 7 )]
+position = Vector2( 177, -123 )
+scale = Vector2( 5.5, 3.7 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 513, 538 )
+position = Vector2( 489, 702 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2( -1, 0 )
@@ -33,20 +40,77 @@ drag_margin_left = 1.0
 drag_margin_right = 1.0
 editor_draw_drag_margin = true
 
-[node name="Label" type="Label" parent="."]
-margin_left = 405.0
-margin_top = 296.0
-margin_right = 567.0
-margin_bottom = 310.0
-text = "AAAAAAAAAAAAAAAAAA"
-
-[node name="Gerenciador_fase" parent="." instance=ExtResource( 3 )]
-position = Vector2( 505, 106 )
-
-[node name="Enemy" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1005, 538 )
+[node name="GAME" parent="Player/Camera2D" instance=ExtResource( 1 )]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+margin_left = -511.0
+margin_top = -175.0
+margin_right = -511.0
+margin_bottom = -175.0
 
 [node name="TimerEnemy" type="Timer" parent="."]
+wait_time = 0.9
 autostart = true
 
+[node name="Enemy7" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1604, 480 )
+
+[node name="Enemy" parent="." instance=ExtResource( 5 )]
+position = Vector2( 996, 480 )
+x = 996
+
+[node name="Enemy3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 287, 480 )
+x = 287
+
+[node name="Gerenciador_fase" parent="." instance=ExtResource( 3 )]
+visible = false
+position = Vector2( 610, -281 )
+
+[node name="Bullet_big" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1380, 400 )
+x = 1380
+
+[node name="TimerBullet_big" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="Bullet_big2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 900, 400 )
+x = 900
+
+[node name="Bullet_big3" parent="." instance=ExtResource( 6 )]
+position = Vector2( 420, 400 )
+x = 420
+
+[node name="Bullet_big4" parent="." instance=ExtResource( 6 )]
+position = Vector2( -60, 400 )
+x = -60
+
+[node name="TimerFinal" type="Timer" parent="."]
+wait_time = 0.4
+autostart = true
+
+[node name="Enemy4" parent="." instance=ExtResource( 5 )]
+position = Vector2( 524, 480 )
+scale = Vector2( 2.08, 1.36 )
+x = 524
+
+[node name="Enemy2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 772, 480 )
+x = 772
+
+[node name="Enemy6" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1405, 480 )
+scale = Vector2( 2.08, 1.36 )
+x = 1392
+
+[node name="Enemy5" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1217, 480 )
+scale = Vector2( 2.08, 1.36 )
+x = 1217
+
 [connection signal="timeout" from="TimerEnemy" to="." method="_on_TimerEnemy_timeout"]
+[connection signal="timeout" from="TimerBullet_big" to="." method="_on_TimerBullet_big_timeout"]
+[connection signal="timeout" from="TimerFinal" to="." method="_on_TimerFinal_timeout"]

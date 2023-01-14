@@ -6,7 +6,7 @@ enum{MOVE, DASH, GANCHO}
 var STATE
 
 onready var gancho := $gancho as RayCast2D
-var qte_gancho = 3
+var qte_gancho = 1
 var ganching = false 
 
 const Dash_Speed = 200
@@ -14,7 +14,7 @@ export var Dash_duration = 0.4
 var direction_dash = Vector2()
 var is_dashing = true
 var can_dash = true
-var qte_dash = 3
+var qte_dash = 1
 
 var speed = 200
 var velocity = Vector2()
@@ -97,7 +97,7 @@ func dash_state(_delta):
 func gancho_state():
 	velocity = global_position.direction_to(gancho.get_collision_point())
 	velocity = velocity.normalized()
-	var _aux = move_and_slide(velocity * speed * 15)
+	var _aux = move_and_slide(velocity * speed * 30)
 	STATE = MOVE
 	 
 func global_update():

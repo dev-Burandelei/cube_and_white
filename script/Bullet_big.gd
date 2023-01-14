@@ -1,14 +1,14 @@
 extends KinematicBody2D
-class_name Bullet_enemy
+class_name Bullet_Big_enemy
 
-export var y = 500
+export var y = 470
 export var x = 1400
-export var speed = -320
+export var speed = -160
 var velocity = Vector2(10,10)
 
 
 func _ready():
-	position.y = y
+	position.y = 535
 	position.x = x
 
 
@@ -18,6 +18,9 @@ func _physics_process(_delta):
 	var _aux = move_and_slide(velocity)
 
 
-func _on_Killenemy_body_entered(body):
+
+
+
+func _on_KillerEnemy_body_entered(body):
 	body.queue_free()
 	assert(get_tree().change_scene("res://Cenas/GAMEOVER.tscn") == OK)

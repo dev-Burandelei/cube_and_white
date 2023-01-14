@@ -13,5 +13,7 @@ func gerenciador():
 	
 	
 
+
+
 func _on_Signal_fase_body_entered(_body):
 	gerenciador()

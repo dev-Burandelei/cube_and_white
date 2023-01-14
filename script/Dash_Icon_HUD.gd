@@ -2,7 +2,7 @@ extends Label
 
 
 func _process(_delta):
-	self.text = "DASH:" + String(Global.dash) 
+	self.text = "DASH:" + str(Global.dash) 
 
 
 	if Global.Can_Dash == true:

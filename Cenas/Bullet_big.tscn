@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://script/Bullet_big.gd" type="Script" id=1]
+[ext_resource path="res://Sprite/bullet.png" type="Texture" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 9.0
+height = 0.0
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 38.0
+height = 120.0
+
+[node name="Bullet_big" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 146, -65.5 )
+scale = Vector2( 13.1667, 6.45833 )
+texture = ExtResource( 2 )
+
+[node name="KillerEnemy" type="Area2D" parent="Sprite"]
+rotation = 1.5708
+scale = Vector2( 0.873509, 0.839211 )
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/KillerEnemy"]
+position = Vector2( 0, -0.0376186 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 146, -65 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[connection signal="body_entered" from="Sprite/KillerEnemy" to="." method="_on_KillerEnemy_body_entered"]
