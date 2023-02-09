@@ -22,5 +22,5 @@ func _physics_process(_delta):
 
 
 func _on_KillerEnemy_body_entered(body):
-	body.queue_free()
-	assert(get_tree().change_scene("res://Cenas/GAMEOVER.tscn") == OK)
+	body.gameover()
+	

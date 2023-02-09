@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 
-enum{MOVE, DASH, GANCHO}
+enum{MOVE, DASH, GANCHO, DEAD}
 
 var STATE
 
@@ -9,15 +9,21 @@ onready var gancho := $gancho as RayCast2D
 var qte_gancho = 1
 var ganching = false 
 
-const Dash_Speed = 200
-export var Dash_duration = 0.4
+const Dash_Speed = 500
+export var Dash_duration = 0.05
 var direction_dash = Vector2()
 var is_dashing = true
 var can_dash = true
 var qte_dash = 1
+var sprite
+var ghost_scene = preload("res://Cenas/DashGhost.tscn")
 
 var speed = 200
 var velocity = Vector2()
+
+var death
+var blood_particule = preload("res://Cenas/Blood.tscn")
+
 
 func _ready():
 	STATE = MOVE
@@ -42,6 +48,9 @@ func _physics_process(delta):
 			
 		GANCHO:
 			gancho_state()
+		
+		DEAD:
+			pass
 			
 		
 func _input(_delta):
@@ -61,12 +70,16 @@ func _input(_delta):
 		velocity += Vector2(1,0)
 		gancho.cast_to = Vector2(300,0)
 	
-	if Input.is_action_just_pressed("dash") and can_dash and !is_dashing and qte_dash > 0:
+	
+	if   Input.is_action_pressed("dash") and can_dash and !is_dashing and qte_dash > 0:
 		STATE = DASH
+		instance_ghost()
+		self.sprite = $Sprite
 		is_dashing = true
 		can_dash = false
 		qte_dash = qte_dash - 1
 		$DashTimer.start(Dash_duration)
+	
 		
 	if Input.is_action_just_released("gancho") and ganching:
 			qte_gancho = qte_gancho - 1
@@ -87,11 +100,12 @@ func move(_delta):
 	velocity = Vector2(0,0)
 
 func _on_DashTimer_timeout():
-	STATE = MOVE
 	is_dashing = false
 	can_dash = true
+	$wait.start(0.4)
 	
 func dash_state(_delta):
+	velocity = velocity.normalized()
 	var _aux = move_and_slide(velocity * Dash_Speed)
 	
 func gancho_state():
@@ -104,6 +118,7 @@ func global_update():
 	
 	Global.dash = qte_dash
 	Global.gancho = qte_gancho
+	Global.dead = death
 	
 	if qte_dash > 0:
 		Global.Can_Dash = true
@@ -116,5 +131,35 @@ func global_update():
 		Global.Can_Gancho = false
 		
 func gameover():
-	queue_free()
-	assert(get_tree().change_scene("res://Cenas/GAMEOVER.tscn"))
+	Global.camera.shakeCamera(30)
+	var blood = blood_particule.instance()
+	add_child(blood)
+	blood.rotation_degrees = rad2deg(velocity.angle())
+	$Sprite.hide()
+	$"CollisionShape2D".queue_free()
+	STATE = DEAD
+	death = true
+	
+	$wait_death.start(1.5)
+	
+
+
+func _on_wait_death_timeout():
+	assert(get_tree().change_scene("res://Cenas/GAMEOVER.tscn") == OK)
+
+
+func _on_wait_timeout():
+	STATE = MOVE
+	
+func instance_ghost():
+	var ghost: Sprite = ghost_scene.instance()
+	get_parent().get_parent().add_child(ghost)
+	
+	ghost.global_position = global_position
+	ghost.texture = sprite.texture
+	ghost.vframes = sprite.vframes
+	ghost.hframes = sprite.hframes
+	ghost.frame = sprite.frame
+	ghost.flip_h = sprite.flip_h	
+	
+	

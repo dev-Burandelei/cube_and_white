@@ -4,12 +4,11 @@
 [ext_resource path="res://script/Enemy.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 11.0
-height = 22.0
+radius = 9.17644
+height = 12.9548
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 8.0
-height = 2.0
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 6.61766, 6.52586 )
 
 [node name="Enemy" type="KinematicBody2D"]
 scale = Vector2( 2.08, 1.36 )
@@ -20,6 +19,7 @@ y = 480
 x = 1450
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 18, 7 )
 rotation = 1.5708
 shape = SubResource( 2 )
@@ -34,7 +34,7 @@ rotation = 1.5708
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Killenemy"]
-position = Vector2( 0.666667, 0.196721 )
-shape = SubResource( 1 )
+position = Vector2( 1.63724, -1.7062 )
+shape = SubResource( 3 )
 
 [connection signal="body_entered" from="Sprite/Killenemy" to="." method="_on_Killenemy_body_entered"]
