@@ -14,9 +14,12 @@ export var Dash_duration = 0.05
 var direction_dash = Vector2()
 var is_dashing = true
 var can_dash = true
-var qte_dash = 1
+var qte_dash = 100
 var sprite
 var ghost_scene = preload("res://Cenas/DashGhost.tscn")
+var impactD = 0
+
+
 
 var speed = 200
 var velocity = Vector2()
@@ -56,25 +59,29 @@ func _physics_process(delta):
 func _input(_delta):
 	if Input.is_action_pressed("move_back") :
 		velocity += Vector2(0,1)
-		gancho.cast_to = Vector2(0,300)
+		gancho.cast_to = Vector2(0,500)
+		$fx_dash.rotation_degrees = rad2deg(velocity.angle())
+		
 		
 	elif Input.is_action_pressed("move_forward"):
 		velocity += Vector2(0,-1)
-		gancho.cast_to = Vector2(0,-300)
+		gancho.cast_to = Vector2(0,-500)
+		$fx_dash.rotation_degrees = rad2deg(velocity.angle())
 		
 	elif Input.is_action_pressed("move_left"):
 		velocity += Vector2(-1, 0)
-		gancho.cast_to = Vector2(-300,0)
-		
+		gancho.cast_to = Vector2(-500,0)
+		$fx_dash.rotation_degrees = rad2deg(velocity.angle())
+			
 	elif Input.is_action_pressed("move_right"):
 		velocity += Vector2(1,0)
-		gancho.cast_to = Vector2(300,0)
+		gancho.cast_to = Vector2(500,0)
+		$fx_dash.rotation_degrees = rad2deg(velocity.angle() * -1)
 	
 	
-	if   Input.is_action_pressed("dash") and can_dash and !is_dashing and qte_dash > 0:
+	if   Input.is_action_pressed("dash") and can_dash and !is_dashing and qte_dash > 0 and (velocity.x != 0 or velocity.y != 0):
 		STATE = DASH
-		instance_ghost()
-		self.sprite = $Sprite
+		$fx_dash.set_emitting(true)
 		is_dashing = true
 		can_dash = false
 		qte_dash = qte_dash - 1
@@ -102,6 +109,7 @@ func move(_delta):
 func _on_DashTimer_timeout():
 	is_dashing = false
 	can_dash = true
+	impactD = 1
 	$wait.start(0.4)
 	
 func dash_state(_delta):
@@ -111,7 +119,7 @@ func dash_state(_delta):
 func gancho_state():
 	velocity = global_position.direction_to(gancho.get_collision_point())
 	velocity = velocity.normalized()
-	var _aux = move_and_slide(velocity * speed * 30)
+	var _aux = move_and_slide(velocity * speed * 7)
 	STATE = MOVE
 	 
 func global_update():
@@ -150,16 +158,8 @@ func _on_wait_death_timeout():
 
 func _on_wait_timeout():
 	STATE = MOVE
+	print("aaaaaa")
+		
 	
-func instance_ghost():
-	var ghost: Sprite = ghost_scene.instance()
-	get_parent().get_parent().add_child(ghost)
-	
-	ghost.global_position = global_position
-	ghost.texture = sprite.texture
-	ghost.vframes = sprite.vframes
-	ghost.hframes = sprite.hframes
-	ghost.frame = sprite.frame
-	ghost.flip_h = sprite.flip_h	
-	
+
 	

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://script/Bullet_big.gd" type="Script" id=1]
 [ext_resource path="res://Sprite/bullet.png" type="Texture" id=2]
+[ext_resource path="res://Sprite/light.jpg" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 7.8881
@@ -12,13 +13,10 @@ radius = 37.9998
 height = 112.0
 
 [node name="Bullet_big" type="KinematicBody2D"]
-position = Vector2( -47, -1 )
+position = Vector2( -14, 5 )
 collision_layer = 4
 collision_mask = 0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 146, -65.5 )
@@ -38,5 +36,12 @@ shape = SubResource( 1 )
 position = Vector2( 141, -63 )
 rotation = 1.5708
 shape = SubResource( 2 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 147.75, -58 )
+scale = Vector2( 0.94, 0.408889 )
+texture = ExtResource( 3 )
+color = Color( 0.690196, 0, 0, 1 )
+energy = 0.6
 
 [connection signal="body_entered" from="Sprite/KillerEnemy" to="." method="_on_KillerEnemy_body_entered"]

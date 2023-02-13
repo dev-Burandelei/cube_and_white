@@ -6,6 +6,7 @@
 [node name="Blood" type="CPUParticles2D"]
 self_modulate = Color( 0.917647, 0.0823529, 0.0823529, 0.690196 )
 scale = Vector2( 0.1, 0.1 )
+z_index = -1
 amount = 100
 explosiveness = 1.0
 randomness = 1.0
