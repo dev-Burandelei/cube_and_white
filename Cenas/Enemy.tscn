@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Sprite/bullet.png" type="Texture" id=1]
+[ext_resource path="res://Texture/bullet.png" type="Texture" id=1]
 [ext_resource path="res://script/Enemy.gd" type="Script" id=2]
-[ext_resource path="res://Sprite/light.jpg" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 9.17644
@@ -37,12 +36,5 @@ collision_layer = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Killenemy"]
 position = Vector2( 1.63724, -1.7062 )
 shape = SubResource( 3 )
-
-[node name="Light2D" type="Light2D" parent="."]
-position = Vector2( 18.0289, 5.51471 )
-scale = Vector2( 0.181624, 0.107843 )
-texture = ExtResource( 3 )
-color = Color( 0.690196, 0, 0, 1 )
-energy = 0.6
 
 [connection signal="body_entered" from="Sprite/Killenemy" to="." method="_on_Killenemy_body_entered"]

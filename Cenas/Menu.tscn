@@ -27,7 +27,7 @@ text = "CUBE && WHITE"
 margin_top = 34.0
 margin_right = 104.0
 margin_bottom = 54.0
-text = "Inicialiar"
+text = "Inicializar"
 
 [node name="QUIT" type="Button" parent="VBoxContainer"]
 margin_top = 74.0

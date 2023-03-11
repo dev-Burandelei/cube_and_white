@@ -9,12 +9,12 @@ onready var gancho := $gancho as RayCast2D
 var qte_gancho = 1
 var ganching = false 
 
-const Dash_Speed = 500
+const Dash_Speed = 750
 export var Dash_duration = 0.05
 var direction_dash = Vector2()
 var is_dashing = true
 var can_dash = true
-var qte_dash = 100
+var qte_dash = 1
 var sprite
 var ghost_scene = preload("res://Cenas/DashGhost.tscn")
 var impactD = 0
@@ -48,38 +48,38 @@ func _physics_process(delta):
 			
 		DASH:
 			dash_state(delta)
+			_input(delta)
 			
 		GANCHO:
 			gancho_state()
+			_input(delta)
 		
 		DEAD:
 			pass
 			
 		
 func _input(_delta):
+	
+	gancho.look_at(get_global_mouse_position())
 	if Input.is_action_pressed("move_back") :
 		velocity += Vector2(0,1)
-		gancho.cast_to = Vector2(0,500)
 		$fx_dash.rotation_degrees = rad2deg(velocity.angle())
 		
 		
-	elif Input.is_action_pressed("move_forward"):
+	if Input.is_action_pressed("move_forward"):
 		velocity += Vector2(0,-1)
-		gancho.cast_to = Vector2(0,-500)
 		$fx_dash.rotation_degrees = rad2deg(velocity.angle())
 		
-	elif Input.is_action_pressed("move_left"):
+	if Input.is_action_pressed("move_left"):
 		velocity += Vector2(-1, 0)
-		gancho.cast_to = Vector2(-500,0)
 		$fx_dash.rotation_degrees = rad2deg(velocity.angle())
 			
-	elif Input.is_action_pressed("move_right"):
+	if Input.is_action_pressed("move_right"):
 		velocity += Vector2(1,0)
-		gancho.cast_to = Vector2(500,0)
 		$fx_dash.rotation_degrees = rad2deg(velocity.angle() * -1)
 	
 	
-	if   Input.is_action_pressed("dash") and can_dash and !is_dashing and qte_dash > 0 and (velocity.x != 0 or velocity.y != 0):
+	if Input.is_action_pressed("dash") and can_dash and !is_dashing and qte_dash > 0 and (velocity.x != 0 or velocity.y != 0):
 		STATE = DASH
 		$fx_dash.set_emitting(true)
 		is_dashing = true

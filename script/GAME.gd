@@ -2,7 +2,7 @@ extends Control
 
 
 func _ready():
-	Global.time = 150
+	Global.time = 15
 	Global.dead = null
 	
 func _process(_delta):
